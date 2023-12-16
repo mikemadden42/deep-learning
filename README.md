@@ -9,3 +9,9 @@ source venv/bin/activate
 pip3 install --upgrade pip setuptools
 pip3 install --upgrade tensorflow
 ```
+
+Setup requirements with poetry.
+
+```bash
+poetry install
+```
