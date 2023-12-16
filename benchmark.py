@@ -24,11 +24,10 @@ print(f"CPU Execution Time: {time_cpu} seconds")
 # Run the operation on GPU
 # Make sure to have a GPU available for this to work
 if tf.config.list_physical_devices("GPU"):
-    start_time_gpu = time.time()
-    # Explicitly place the matrix on the GPU
-    matrix_gpu = tf.device("/GPU:0")(matrix_gpu)
-    result_gpu = matmul_operation(matrix_gpu)
-    end_time_gpu = time.time()
+    with tf.device("/GPU:0"):
+        start_time_gpu = time.time()
+        result_gpu = matmul_operation(matrix_gpu)
+        end_time_gpu = time.time()
     time_gpu = end_time_gpu - start_time_gpu
     print(f"GPU Execution Time: {time_gpu} seconds")
 else:
