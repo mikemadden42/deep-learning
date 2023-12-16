@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+# https://developer.apple.com/metal/tensorflow-plugin/
+
 import tensorflow as tf
 
 cifar = tf.keras.datasets.cifar100

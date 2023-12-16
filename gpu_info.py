@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import tensorflow as tf
 
 
@@ -14,7 +16,6 @@ def get_gpu_info():
             print(f"GPU {i + 1}:")
 
             # Get device details
-            # device_details = tf.config.experimental.get_device_details(device.name)
             device_details = tf.config.experimental.get_device_details(device)
 
             for key, value in device_details.items():
