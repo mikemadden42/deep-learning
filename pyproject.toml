@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "deep-learning"
+version = "0.1.0"
+description = "Accelerate the training of machine learning models with TensorFlow right on your Mac."
+authors = ["Michael Madden <mikemadden42@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+tensorflow-macos = "^2.15.0"
+tensorflow-metal = "^1.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
