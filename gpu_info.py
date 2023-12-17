@@ -9,17 +9,23 @@ def get_gpu_info():
         physical_devices = tf.config.experimental.list_physical_devices("GPU")
 
         if not physical_devices:
-            print("No GPU found.")
-            return
+            raise RuntimeError("No GPU found.")
 
         for i, device in enumerate(physical_devices):
+            if device.device_type != "GPU":
+                print(f"Device {device.name} is not a GPU. Skipping.")
+                continue
+
             print(f"GPU {i + 1}:")
 
             # Get device details
             device_details = tf.config.experimental.get_device_details(device)
 
-            for key, value in device_details.items():
-                print(f"  {key}: {value}")
+            if device_details:
+                for key, value in device_details.items():
+                    print(f"  {key}: {value}")
+            else:
+                print("  No device details available.")
 
             print()
 
