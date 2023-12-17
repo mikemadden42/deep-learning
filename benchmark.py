@@ -25,16 +25,13 @@ def benchmark_cpu(matrix_size):
 
 def benchmark_gpu(matrix_size):
     if tf.config.list_physical_devices("GPU"):
-        gpu_device = tf.config.list_physical_devices("GPU")[0]
         matrix_gpu = create_random_matrix(matrix_size)
-        with tf.device(gpu_device.name):
+        with tf.device("/GPU:0"):
             start_time = timeit.default_timer()
             matmul_operation(matrix_gpu)
             end_time = timeit.default_timer()
         time_gpu = end_time - start_time
-        logging.info(
-            f"GPU (Device: {gpu_device.name}, Size {matrix_size}): {time_gpu} seconds"
-        )
+        logging.info(f"GPU (Size {matrix_size}): {time_gpu} seconds")
         return time_gpu
     else:
         logging.warning("No GPU available.")
@@ -42,7 +39,8 @@ def benchmark_gpu(matrix_size):
 
 
 def main():
-    matrix_sizes = [1000, 5000, 10000]
+    matrix_sizes = [2**i for i in range(10, 15)]
+    print(matrix_sizes)
 
     for size in matrix_sizes:
         # Benchmark CPU
