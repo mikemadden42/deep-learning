@@ -39,7 +39,7 @@ def benchmark_gpu(matrix_size):
 
 
 def main():
-    matrix_sizes = [2**i for i in range(10, 15)]
+    matrix_sizes = [2**i for i in range(8, 14)]
     print(matrix_sizes)
 
     for size in matrix_sizes:
