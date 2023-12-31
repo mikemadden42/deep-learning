@@ -3,17 +3,18 @@
 import tensorflow as tf
 import timeit
 import logging
+from typing import Optional
 
 
-def create_random_matrix(matrix_size):
+def create_random_matrix(matrix_size: int) -> tf.Tensor:
     return tf.random.normal((matrix_size, matrix_size))
 
 
-def matmul_operation(matrix):
+def matmul_operation(matrix: tf.Tensor) -> tf.Tensor:
     return tf.matmul(matrix, matrix)
 
 
-def benchmark_cpu(matrix_size):
+def benchmark_cpu(matrix_size: int) -> float:
     matrix_cpu = create_random_matrix(matrix_size)
     start_time = timeit.default_timer()
     matmul_operation(matrix_cpu)
@@ -23,7 +24,7 @@ def benchmark_cpu(matrix_size):
     return time_cpu
 
 
-def benchmark_gpu(matrix_size):
+def benchmark_gpu(matrix_size: int) -> Optional[float]:
     if tf.config.list_physical_devices("GPU"):
         matrix_gpu = create_random_matrix(matrix_size)
         with tf.device("/GPU:0"):

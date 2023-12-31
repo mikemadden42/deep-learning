@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 import tensorflow as tf
+from typing import List, Union
 
 
-def print_device_details(devices, device_type):
+def print_device_details(
+    devices: List[Union[tf.config.PhysicalDevice, None]], device_type: str
+) -> None:
     print(f"{device_type} Information:")
     if devices:
         for i, device in enumerate(devices):
@@ -16,8 +19,12 @@ def print_device_details(devices, device_type):
 
 
 if __name__ == "__main__":
-    cpus = tf.config.list_physical_devices("CPU")
-    gpus = tf.config.list_physical_devices("GPU")
+    cpus: List[Union[tf.config.PhysicalDevice, None]] = tf.config.list_physical_devices(
+        "CPU"
+    )
+    gpus: List[Union[tf.config.PhysicalDevice, None]] = tf.config.list_physical_devices(
+        "GPU"
+    )
 
     print_device_details(cpus, "CPU")
     print_device_details(gpus, "GPU")

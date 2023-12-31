@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
 import tensorflow as tf
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.callbacks import EarlyStopping
 
 # Load CIFAR-100 dataset
-cifar = tf.keras.datasets.cifar100
+cifar: tf.keras.datasets.cifar100 = tf.keras.datasets.cifar100
 (x_train, y_train), (x_test, y_test) = cifar.load_data()
 
 # Normalize pixel values to be between 0 and 1
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 # Use data augmentation
-data_augmentation = tf.keras.Sequential(
+data_augmentation: tf.keras.Sequential = tf.keras.Sequential(
     [
         tf.keras.layers.experimental.preprocessing.Rescaling(1.0 / 255),
         tf.keras.layers.experimental.preprocessing.RandomFlip("horizontal"),
@@ -20,12 +23,12 @@ data_augmentation = tf.keras.Sequential(
 )
 
 # Split the training data into training and validation sets
-split = int(0.8 * len(x_train))
+split: int = int(0.8 * len(x_train))
 x_train, x_val = x_train[:split], x_train[split:]
 y_train, y_val = y_train[:split], y_train[split:]
 
 # Use pre-trained weights from ImageNet
-base_model = tf.keras.applications.ResNet50(
+base_model: Model = tf.keras.applications.ResNet50(
     include_top=False,  # Exclude the top (fully connected) layers
     weights="imagenet",
     input_shape=(32, 32, 3),
@@ -37,18 +40,20 @@ for layer in base_model.layers:
     layer.trainable = False
 
 # Extract features using the base model
-x = base_model.output
+x: tf.Tensor = base_model.output
 
 # Add custom output layer for CIFAR-100
-output_layer = tf.keras.layers.Dense(100, activation="softmax")(x)
+output_layer: Dense = tf.keras.layers.Dense(100, activation="softmax")(x)
 
 # Create the model
-model = tf.keras.Model(inputs=base_model.input, outputs=output_layer)
+model: Model = tf.keras.Model(inputs=base_model.input, outputs=output_layer)
 
 # Compile the model with a learning rate scheduler
-initial_learning_rate = 0.001
-lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
-    initial_learning_rate, decay_steps=10000, decay_rate=0.9, staircase=True
+initial_learning_rate: float = 0.001
+lr_schedule: tf.keras.optimizers.schedules.ExponentialDecay = (
+    tf.keras.optimizers.schedules.ExponentialDecay(
+        initial_learning_rate, decay_steps=10000, decay_rate=0.9, staircase=True
+    )
 )
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=lr_schedule),
@@ -57,7 +62,7 @@ model.compile(
 )
 
 # Train the model with early stopping
-early_stopping = tf.keras.callbacks.EarlyStopping(
+early_stopping: EarlyStopping = tf.keras.callbacks.EarlyStopping(
     monitor="val_loss", patience=3, restore_best_weights=True
 )
 

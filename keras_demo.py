@@ -6,6 +6,7 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
 from tensorflow.keras import utils
 from keras.datasets import mnist
+from typing import Tuple
 
 # Set random seed for reproducibility
 np.random.seed(123)
@@ -14,17 +15,17 @@ np.random.seed(123)
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 # Preprocess input data
-X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
-X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
-X_train = X_train.astype("float32") / 255
-X_test = X_test.astype("float32") / 255
+X_train: np.ndarray = X_train.reshape(X_train.shape[0], 28, 28, 1)
+X_test: np.ndarray = X_test.reshape(X_test.shape[0], 28, 28, 1)
+X_train: np.ndarray = X_train.astype("float32") / 255
+X_test: np.ndarray = X_test.astype("float32") / 255
 
 # Preprocess class labels
-Y_train = utils.to_categorical(y_train, 10)
-Y_test = utils.to_categorical(y_test, 10)
+Y_train: np.ndarray = utils.to_categorical(y_train, 10)
+Y_test: np.ndarray = utils.to_categorical(y_test, 10)
 
 # Define model architecture
-model = Sequential()
+model: Sequential = Sequential()
 
 model.add(Convolution2D(32, (3, 3), activation="relu", input_shape=(28, 28, 1)))
 model.add(Convolution2D(32, (3, 3), activation="relu"))
@@ -48,7 +49,7 @@ history = model.fit(
 )
 
 # Evaluate model on test data
-score = model.evaluate(X_test, Y_test, verbose=0)
+score: Tuple[float, float] = model.evaluate(X_test, Y_test, verbose=0)
 
 # Print test accuracy
 print("Test Accuracy:", score[1])
