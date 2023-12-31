@@ -7,6 +7,13 @@ from typing import List, Union
 def print_device_details(
     devices: List[Union[tf.config.PhysicalDevice, None]], device_type: str
 ) -> None:
+    """
+    Print details of the specified type of devices.
+
+    Args:
+        devices (List[Union[tf.config.PhysicalDevice, None]]): List of devices.
+        device_type (str): Type of the devices (e.g., "CPU" or "GPU").
+    """
     print(f"{device_type} Information:")
     if devices:
         for i, device in enumerate(devices):

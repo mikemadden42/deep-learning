@@ -5,6 +5,12 @@ from typing import List, Dict, Any, Union
 
 
 def get_gpu_info() -> None:
+    """
+    Print information about available GPU devices and their details.
+
+    Raises:
+        RuntimeError: If no GPU is found.
+    """
     try:
         # Get the list of available physical devices
         physical_devices: List[

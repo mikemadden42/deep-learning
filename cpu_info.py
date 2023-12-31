@@ -5,6 +5,12 @@ from typing import List, Union
 
 
 def get_cpu_info() -> None:
+    """
+    Print information about available CPU devices using TensorFlow.
+
+    Raises:
+        RuntimeError: If no CPU is found.
+    """
     try:
         # Get CPU information using TensorFlow
         cpu_info: List[

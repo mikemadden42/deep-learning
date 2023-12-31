@@ -7,14 +7,41 @@ from typing import Optional
 
 
 def create_random_matrix(matrix_size: int) -> tf.Tensor:
+    """
+    Create a random matrix of the specified size.
+
+    Args:
+        matrix_size (int): The size of the square matrix.
+
+    Returns:
+        tf.Tensor: A random matrix of shape (matrix_size, matrix_size).
+    """
     return tf.random.normal((matrix_size, matrix_size))
 
 
 def matmul_operation(matrix: tf.Tensor) -> tf.Tensor:
+    """
+    Perform matrix multiplication on the input matrix.
+
+    Args:
+        matrix (tf.Tensor): The input matrix.
+
+    Returns:
+        tf.Tensor: The result of matrix multiplication.
+    """
     return tf.matmul(matrix, matrix)
 
 
 def benchmark_cpu(matrix_size: int) -> float:
+    """
+    Benchmark matrix multiplication on CPU.
+
+    Args:
+        matrix_size (int): The size of the square matrix.
+
+    Returns:
+        float: The time taken for matrix multiplication on CPU in seconds.
+    """
     matrix_cpu = create_random_matrix(matrix_size)
     start_time = timeit.default_timer()
     matmul_operation(matrix_cpu)
@@ -25,6 +52,16 @@ def benchmark_cpu(matrix_size: int) -> float:
 
 
 def benchmark_gpu(matrix_size: int) -> Optional[float]:
+    """
+    Benchmark matrix multiplication on GPU if available.
+
+    Args:
+        matrix_size (int): The size of the square matrix.
+
+    Returns:
+        Optional[float]: The time taken for matrix multiplication on GPU in seconds,
+        or None if no GPU is available.
+    """
     if tf.config.list_physical_devices("GPU"):
         matrix_gpu = create_random_matrix(matrix_size)
         with tf.device("/GPU:0"):
@@ -40,6 +77,9 @@ def benchmark_gpu(matrix_size: int) -> Optional[float]:
 
 
 def main():
+    """
+    Main function to perform matrix multiplication benchmarks for different matrix sizes.
+    """
     matrix_sizes = [2**i for i in range(8, 14)]
     print(matrix_sizes)
 
