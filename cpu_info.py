@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import tensorflow as tf
 from typing import List, Union
+
+import tensorflow as tf
 
 
 def get_cpu_info() -> None:
@@ -13,9 +14,9 @@ def get_cpu_info() -> None:
     """
     try:
         # Get CPU information using TensorFlow
-        cpu_info: List[
-            Union[tf.config.PhysicalDevice, None]
-        ] = tf.config.experimental.list_physical_devices("CPU")
+        cpu_info: List[Union[tf.config.PhysicalDevice, None]] = (
+            tf.config.experimental.list_physical_devices("CPU")
+        )
 
         if not cpu_info:
             raise RuntimeError("No CPU found.")

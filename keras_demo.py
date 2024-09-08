@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Convolution2D, MaxPooling2D
-from tensorflow.keras import utils
-from keras.datasets import mnist
 from typing import Tuple
+
+import numpy as np
+from keras.datasets import mnist
+from keras.layers import Convolution2D, Dense, Dropout, Flatten, MaxPooling2D
+from keras.models import Sequential
+from tensorflow.keras import utils
 
 # Set random seed for reproducibility
 np.random.seed(123)

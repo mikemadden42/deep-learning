@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import tensorflow as tf
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dense
 from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Model
 
 # Load CIFAR-100 dataset
 cifar: tf.keras.datasets.cifar100 = tf.keras.datasets.cifar100

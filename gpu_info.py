@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
+from typing import Any, Dict, List, Union
+
 import tensorflow as tf
-from typing import List, Dict, Any, Union
 
 
 def get_gpu_info() -> None:
@@ -13,9 +14,9 @@ def get_gpu_info() -> None:
     """
     try:
         # Get the list of available physical devices
-        physical_devices: List[
-            Union[tf.config.PhysicalDevice, None]
-        ] = tf.config.experimental.list_physical_devices("GPU")
+        physical_devices: List[Union[tf.config.PhysicalDevice, None]] = (
+            tf.config.experimental.list_physical_devices("GPU")
+        )
 
         if not physical_devices:
             raise RuntimeError("No GPU found.")

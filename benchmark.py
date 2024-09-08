@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
-import tensorflow as tf
-import timeit
 import logging
+import timeit
 from typing import Optional
+
+import tensorflow as tf
 
 
 def create_random_matrix(matrix_size: int) -> tf.Tensor:

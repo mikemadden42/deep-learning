@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import tensorflow as tf
 from typing import List, Union
+
+import tensorflow as tf
 
 
 def print_device_details(

@@ -12,3 +12,24 @@ tensorflow = "^2.15.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+lint.select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # isort
+    "I",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # Pylint
+    "PL"
+]
+lint.ignore = [
+    # tests use assert
+    "S101"
+]
