@@ -79,7 +79,7 @@ def benchmark_gpu(matrix_size: int) -> Optional[float]:
 
 def main():
     """
-    Main function to perform matrix multiplication benchmarks for different matrix sizes.
+    Main function to perform matrix multiplication benchmarks.
     """
     matrix_sizes = [2**i for i in range(8, 14)]
     print(matrix_sizes)
